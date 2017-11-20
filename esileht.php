@@ -16,15 +16,16 @@ $pildi_number=rand(1, 6);
 
 <body bgcolor="#ADAD85">
 <center><h1>Tere tulemast!</h1>
- <form action="/register.php"> 
+ <form action="register.php"> 
   <input type="submit" value="Registeeru">
-  <form action="/login.php"> 
+  <form action="login.php"> 
   <input type="submit" value="Logi sisse">
   </form>
 <p></p>
 
 <?php
 
+<<<<<<< HEAD
 if ($pildi_number==1)
 {
 echo '<img src="pildid/parkla.jpg" alt="parkla märk">';
@@ -46,3 +47,5 @@ echo '<img src="pildid/muruparkla.jpg" alt="luks parkla">';
 <img src="pildid/tyhiparkla.jpg" alt="tyhi parkla" style="width:500px;height:600px;">
 </center>
 </body>
+=======
+>>>>>>> e578c1b06fd4c286894beee8742220baab72995f
