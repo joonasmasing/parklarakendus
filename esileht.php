@@ -1,11 +1,12 @@
+<?php
+
+
+?>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
+	<meta charset="utf-8">
 <title>Parklarakendus</title>
-
 </head>
 
 <body bgcolor="#ADAD85">
@@ -15,7 +16,12 @@
   <form action="/login.php"> 
   <input type="submit" value="Logi sisse">
   </form>
-<p></p>
+	<p></p>
 <img src="pildid/parkla.jpg" alt="parkla märk">
 </center>
+
+
 </body>
+
+
+
