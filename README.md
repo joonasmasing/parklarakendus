@@ -1,0 +1,2 @@
+# parklarakendus
+Parklasse registreerimine, kustutamine
