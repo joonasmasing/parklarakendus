@@ -10,7 +10,7 @@
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, email, password FROM vp2users WHERE email = ?");
+		$stmt = $mysqli->prepare("SELECT id, email, password FROM autobaasVeeb WHERE email = ?");
 		$stmt->bind_param("s", $email);
 		$stmt->bind_result($id, $emailFromDb, $passwordFromDb);
 		$stmt->execute();
@@ -41,17 +41,17 @@
 		return $notice;
 	}
 	
-	function signUp($signupFirstName, $signupFamilyName, $signupBirthDate, $gender, $signupEmail, $signupPassword){
+	function signUp($signupFirstName, $signupFamilyName, $signupEmail, $signupPassword){
 		//loome andmebaasiühenduse
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 		//valmistame ette käsu andmebaasiserverile
-		$stmt = $mysqli->prepare("INSERT INTO vp2users (firstname, lastname, birthday, gender, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO autobaasVeeb (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
 		echo $mysqli->error;
 		//s - string
 		//i - integer
 		//d - decimal
-		$stmt->bind_param("sssiss", $signupFirstName, $signupFamilyName, $signupBirthDate, $gender, $signupEmail, $signupPassword);
+		$stmt->bind_param("ssss", $signupFirstName, $signupFamilyName, $signupEmail, $signupPassword);
 		//$stmt->execute();
 		if ($stmt->execute()){
 			echo "\n Õnnestus!";
