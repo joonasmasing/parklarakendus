@@ -15,8 +15,6 @@
 </head>
 <body>
 	<h1>Logi sisse!</h1>
-	<p>Siin harjutame sisselogimise funktsionaalsust.</p>
-	
 	<form method="POST">
 		<label>Kasutajanimi (E-post): </label>
 		<input name="loginEmail" placeholder="Sisesta e-mail" type="email" value="<?php echo $loginEmail; ?>">
