@@ -43,6 +43,7 @@
 			$signupFamilyName = test_input($_POST["signupFamilyName"]);
 		}
 	}
+	}
 	
 	
 	
