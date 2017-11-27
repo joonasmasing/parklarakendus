@@ -3,6 +3,7 @@
 	require("config.php");
 	$database = "if17_joosep_2";
 	
+	$signupPassword = "";
 	$signupFirstName = "";
 	$signupFamilyName = "";
 	$signupEmail = "";
@@ -21,82 +22,86 @@
 	$signupEmailError = "";
 	$signupPasswordError = "";
 	
-	//kas on kasutajanimi sisestatud
-	if (isset($_POST["loginEmail"])){
-		if (empty ($_POST["loginEmail"])){
-			//$loginEmailError ="NB! Ilma selleta ei saa sisse logida!";
-		} else {
-			$loginEmail = $_POST["loginEmail"];
+	
+	//kas klikiti kasutaja loomise nupul
+	if(isset($_POST["signupButton"])){
+	
+		//kas on kasutajanimi sisestatud
+		if (isset($_POST["loginEmail"])){
+			if (empty ($_POST["loginEmail"])){
+				//$loginEmailError ="NB! Ilma selleta ei saa sisse logida!";
+			} else {
+				$loginEmail = $_POST["loginEmail"];
+			}
 		}
-	}
-	
-	//kontrollime, kas kirjutati eesnimi
-	if (isset($_POST["signupFirstName"])){
-		if (empty($_POST["signupFirstName"])){
-			$signupFirstNameError ="NB! Väli on kohustuslik!";
-		} else {
-			$signupFirstName = $_POST["signupFirstName"];
+		
+		//kontrollime, kas kirjutati eesnimi
+		if (isset($_POST["signupFirstName"])){
+			if (empty($_POST["signupFirstName"])){
+				$signupFirstNameError ="NB! Väli on kohustuslik!";
+			} else {
+				$signupFirstName = $_POST["signupFirstName"];
+			}
 		}
-	}
-	
-	//kontrollime, kas kirjutati perekonnanimi
-	if (isset($_POST["signupFamilyName"])){
-		if (empty ($_POST["signupFamilyName"])){
-			$signupFamilyNameError ="NB! Väli on kohustuslik!";
-		} else {
-			$signupFamilyName = $_POST["signupFamilyName"];
+		
+		//kontrollime, kas kirjutati perekonnanimi
+		if (isset($_POST["signupFamilyName"])){
+			if (empty ($_POST["signupFamilyName"])){
+				$signupFamilyNameError ="NB! Väli on kohustuslik!";
+			} else {
+				$signupFamilyName = $_POST["signupFamilyName"];
+			}
 		}
-	}
-	
-	
-	
-	
-	
-	//kontrollime, kas kirjutati kasutajanimeks email
-	if (isset ($_POST["signupEmail"])){
-		if (empty ($_POST["signupEmail"])){
-			//$signupEmailError ="NB! Väli on kohustuslik!";
-		} else {
-			$signupEmail = $_POST["signupEmail"];
+		
+		
+		
+		
+		
+		//kontrollime, kas kirjutati kasutajanimeks email
+		if (isset ($_POST["signupEmail"])){
+			if (empty ($_POST["signupEmail"])){
+				//$signupEmailError ="NB! Väli on kohustuslik!";
+			} else {
+				$signupEmail = $_POST["signupEmail"];
+			}
 		}
-	}
-	
-	
-	if (isset ($_POST["signupPassword"])){
-		if (empty ($_POST["signupPassword"])){
-			$signupPasswordError = "NB! Väli on kohustuslik!";
-		} else {
-			//polnud tühi
-			if (strlen($_POST["signupPassword"]) < 8){
-				$signupPasswordError = "NB! Liiga lühike salasõna, vaja vähemalt 8 tähemärki!";
+		
+		
+		if (isset ($_POST["signupPassword"])){
+			if (empty ($_POST["signupPassword"])){
+				$signupPasswordError = "NB! Väli on kohustuslik!";
+			} else {
+				//polnud tühi
+				if (strlen($_POST["signupPassword"]) < 8){
+					$signupPasswordError = "NB! Liiga lühike salasõna, vaja vähemalt 8 tähemärki!";
+				}
+			}
+		}
+		
+		//KIRJUTAN UUE KASUTAJA ANDMEBAASI
+		if(empty($signupFirstNameError) and empty($signupFamilyNameError) and empty($signupEmailError) and empty($signupPasswordError)
+		){
+			echo "Hakkan salvestama! \n";
+			$signupPassword = hash("sha512", $_POST["signupPassword"]);
+			//echo $signupPassword;
+			//ühendus serveriga
+			$database = "if17_joosep_2";
+			$mysqli = new mysqli($serverHost, $serverUsername, $serverPassword, $database);
+			//käsk andmebaasile
+			$stmt = $mysqli->prepare("INSERT INTO autobaasVeeb (firstname, lastname, email, password) VALUES ( ?, ?, ?, ?)");
+			echo $mysqli->error;
+			//s - string, tekst
+			//i - integer, täisarv
+			//d - decimal, ujukomaarv
+			$stmt->bind_param("ssss", $signupFirstName, $signupFamilyName, $signupEmail, $signupPassword);
+			//$stmt->execute();
+			if ($stmt->execute()){
+				echo "Õnnestus!";
+			} else {
+				echo "Tekkis viga: " .$stmt->error;
 			}
 		}
 	}
-	
-	//KIRJUTAN UUE KASUTAJA ANDMEBAASI
-	if(empty($signupFirstNameError) and empty($signupFamilyNameError) and empty($signupEmailError) and empty($signupPasswordError)
-	){
-		echo "Hakkan salvestama! \n";
-		$signupPassword = hash("sha512", $_POST["signupPassword"]);
-		//echo $signupPassword;
-		//ühendus serveriga
-		$database = "if17_joosep_2";
-		$mysqli = new mysqli($serverHost, $serverUsername, $serverPassword, $database);
-		//käsk andmebaasile
-		$stmt = $mysqli->prepare("INSERT INTO autobaasVeeb (firstname, lastname, email, password) VALUES ( ?, ?, ?, ?)");
-		echo $mysqli->error;
-		//s - string, tekst
-		//i - integer, täisarv
-		//d - decimal, ujukomaarv
-		$stmt->bind_param("ssss", $signupFirstName, $signupFamilyName, $signupEmail, $signupPassword);
-		//$stmt->execute();
-		if ($stmt->execute()){
-			echo "Õnnestus!";
-		} else {
-			echo "Tekkis viga: " .$stmt->error;
-		}
-	}
-	
 	
 	
 	
@@ -124,10 +129,12 @@
 		<br>
 		<label>Perekonnanimi </label>
 		<input name="signupFamilyName" type="text" value="<?php echo $signupFamilyName; ?>">
+		<span><?php echo $signupFamilyNameError; ?></span>
 		<br>
 		
 		<label>Kasutajanimi (E-post) </label>
 		<input name="signupEmail" type="email" value="<?php echo $signupEmail; ?>">
+		<span><?php echo $signupEmailError; ?></span>
 		<br>
 		<label>Parool </label>
 		<input name="signupPassword" placeholder="Salasõna" type="password"><span><?php echo $signupPasswordError; ?></span>
