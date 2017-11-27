@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-
 <?php
 
-$picture_number=rand(1, 6);
+$parking_space = null;
 
+if (isset ($_POST['parking_lots'])){
+	$parking_space=intval($_POST["parking_lots"]);
+}
+	
+$parking_lots=['luksparkla', 'muruparkla', 'ostukekuse parkla', 'siseparkla', 'majaesine parkla'];
+$parking_lots2 = "";
+$parking_lots2 .= '<select name="parking_lots">' ."\n";
+$parking_lots2 .= '<option value="" selected disabled>vali parkla</option>' ."\n";
+
+foreach ($parking_lots as $key=>$lot){
+		if ($key + 1 === $parking_space){
+			$parking_lots2 .= '<option value="' .($key + 1) .'" selected>' .$lot ."</option> \n";
+		} else {
+			$parking_lots2 .= '<option value="' .($key + 1) .'">' .$lot ."</option> \n";
+		}
+	}
+	$parking_lots2 .= "</select> \n";
 ?>
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -19,7 +35,9 @@ $picture_number=rand(1, 6);
 <input type="number" name="quantity" min="0" max="4" value="0">nädalat<br>
 <input type="number" name="quantity" min="0" max="7" value="0">päeva<br>
 <input type="number" name="quantity" min="0" max="24" value="0">tundi<br>
-
+<?php
+	echo $parking_lots2;
+?>
 
 <form action="andmed.php"> 
 <input type="submit" value="Saada">
