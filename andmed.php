@@ -68,7 +68,7 @@
 	
 	
 	<form>
-	<input type="submit" value="Registreeri">
+	<input type="submit" value="Sisesta">
 	<br><br>
 	</form>
 	 

@@ -6,22 +6,7 @@ $picture_number=rand(1, 6);
 
 ?>
 
-<html>
-<head>
-<title>Parklarakendus</title>
-<link rel="stylesheet" type="text/css" href="style/general.css">
-</head>
-
-<body>
-<h1>Oled edukalt sisse loginud. </h1>
-<form action="andmed.php"> 
-<input type="submit" value="Sisesta andmed">
-</form>
-<form action="alustaparkimist.php"> 
-<input type="submit" value="Alusta parkimist">
-</form>
-<p></p>
-
+ALUSTA PARKIMIST SIIA!!
 <?php
 if ($picture_number==1)
 {
