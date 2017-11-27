@@ -38,6 +38,7 @@
             <option value="mootorratas">mootorratas</option>
 			<option value="veok">veok</option>
 			<option value="haagis">haagis</option>
+			<option value="limusiin">limusiin</option>
        </select>
     </TD>        
 </TR>

@@ -74,7 +74,8 @@
 	}
 	
 	//KIRJUTAN UUE KASUTAJA ANDMEBAASI
-	if(empty($signupFirstNameError) and empty($signupFamilyNameError) and empty($signupEmailError) and empty($signupPasswordError)){
+	if(empty($signupFirstNameError) and empty($signupFamilyNameError) and empty($signupEmailError) and empty($signupPasswordError)
+	){
 		echo "Hakkan salvestama! \n";
 		$signupPassword = hash("sha512", $_POST["signupPassword"]);
 		//echo $signupPassword;
@@ -110,6 +111,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Parklarakendus</title>
+	<link rel="stylesheet" type="text/css" href="style/general.css">
 </head>
 	<h1> Registreeri oma kasutaja </h1>
 <body>
@@ -124,15 +126,15 @@
 		<input name="signupFamilyName" type="text" value="<?php echo $signupFamilyName; ?>">
 		<br>
 		
-		<label>Kasutajanimi (E-post)</label>
+		<label>Kasutajanimi (E-post) </label>
 		<input name="signupEmail" type="email" value="<?php echo $signupEmail; ?>">
 		<br>
-		<label>Parool</label>
+		<label>Parool </label>
 		<input name="signupPassword" placeholder="Salasõna" type="password"><span><?php echo $signupPasswordError; ?></span>
 		<br><br>
 
 		
-		<input type="submit" value="Loo kasutaja">
+		<input type="submit" action="login.php" value="Loo kasutaja">
 	
 	
 	</form>

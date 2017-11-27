@@ -13,7 +13,7 @@ $picture_number=rand(1, 6);
 </head>
 
 <body>
-<h1>Tere tulemast!</h1>
+<h1>Oled edukalt sisse loginud. </h1>
 <form action="register.php"> 
 <input type="submit" value="Registeeru">
 </form>
