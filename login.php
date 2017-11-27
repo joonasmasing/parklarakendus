@@ -1,4 +1,29 @@
 <?php
-	require("../../config.php");
-	require("functions.php");
+	require("config.php");
+	
+	$loginEmail = "";
+	
 	//echo $serverHost;
+?>
+
+<!DOCTYPE html>
+<html lang="et">
+<head>
+	<meta charset="utf-8">
+	<title>Sisselogimine või uue kasutaja loomine</title>
+</head>
+<body>
+	<h1>Logi sisse!</h1>
+	<p>Siin harjutame sisselogimise funktsionaalsust.</p>
+	
+	<form method="POST">
+		<label>Kasutajanimi (E-post): </label>
+		<input name="loginEmail" type="email" value="<?php echo $loginEmail; ?>">
+		<br><br>
+		<input name="loginPassword" placeholder="Salasõna" type="password">
+		<br><br>
+		<input type="submit" value="Logi sisse">
+	</form>
+		
+</body>
+</html>

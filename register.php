@@ -1,6 +1,6 @@
 <?php
 	require("functions.php");
-	require("../../config.php");
+	require("config.php");
 	$database = "if17_joosep_2";
 	
 	$signupFirstName = "";
