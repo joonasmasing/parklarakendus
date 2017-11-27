@@ -1,5 +1,5 @@
 <?php
-	//alustame sisselogimist
+	require("functions.php");
 	require("../../config.php");
 	$database = "if17_joosep_2";
 	
@@ -23,92 +23,26 @@
 	
 	$loginEmailError ="";
 	
+	//Kõiki kasutaja loomise sisestusi kontrollitakse vaid, kui on vastavat nuppu klikitud
+	if(isset($_POST["signUpButton"])){
 	
-	
-	//sisselogimise funktsioon
-	function signIn($email, $password){
-		$notice = "";
-		//ühendus serveriga
-		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, firstname, lastname, email, password FROM autobaasVeeb WHERE email = ?");
-		$stmt->bind_param("s", $email);
-		$stmt->bind_result($id, $firstnameFromDb, $lastnameFromDb, $emailFromDb, $passwordFromDb);
-		$stmt->execute();
-		
-		//kontrollime vastavust
-		if ($stmt->fetch()){
-			$hash = hash("sha512", $password);
-			if ($hash == $passwordFromDb){
-				$notice = "Logisite sisse!";
-				
-				//Määran sessiooni muutujad
-				$_SESSION["userId"] = $id;
-				$_SESSION["firstname"] = $firstnameFromDb;
-				$_SESSION["lastname"] = $lastnameFromDb;
-				$_SESSION["userEmail"] = $emailFromDb;
-				
-				//liigume edasi pealehele (main.php)
-				header("Location: main.php");
-				exit();
-			} else {
-				$notice = "Vale salasõna!";
-			}
+	//kontrollime, kas kirjutati eesnimi
+	if (isset ($_POST["signupFirstName"])){
+		if (empty($_POST["signupFirstName"])){
+			$signupFirstNameError ="NB! Väli on kohustuslik!";
 		} else {
-			$notice = 'Sellise kasutajatunnusega "' .$email .'" pole registreeritud!';
+			$signupFirstName = test_input($_POST["signupFirstName"]);
 		}
-		$stmt->close();
-		$mysqli->close();
-		return $notice;
 	}
 	
-	//kasutaja salvestamise funktsioon
-	function signUp($signupFirstName, $signupFamilyName, $signupBirthDate, $gender, $signupEmail, $signupPassword){
-		//loome andmebaasiühenduse
-		
-	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-		//valmistame ette käsu andmebaasiserverile
-		$stmt = $mysqli->prepare("INSERT INTO autobaasVeeb (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-		echo $mysqli->error;
-		//s - string
-		//i - integer
-		//d - decimal
-		$stmt->bind_param("sssiss", $signupFirstName, $signupFamilyName, $signupBirthDate, $gender, $signupEmail, $signupPassword);
-		//$stmt->execute();
-		if ($stmt->execute()){
-			echo "\n Õnnestus!";
+	//kontrollime, kas kirjutati perekonnanimi
+	if (isset ($_POST["signupFamilyName"])){
+		if (empty($_POST["signupFamilyName"])){
+			$signupFamilyNameError ="NB! Väli on kohustuslik!";
 		} else {
-			echo "\n Tekkis viga : " .$stmt->error;
+			$signupFamilyName = test_input($_POST["signupFamilyName"]);
 		}
-		$stmt->close();
-		$mysqli->close();
 	}
-	
-	//kui on juba sisse loginud
-	if(isset($_SESSION["userId"])){
-		header("Location: main.php");
-		exit();
-	}
-	
-	
-	
-	if(isset($_POST["loginButton"])){
-		//kas on kasutajanimi sisestatud
-		if (isset ($_POST["loginEmail"])){
-			if (empty ($_POST["loginEmail"])){
-				$loginEmailError ="NB! Sisselogimiseks on 	vajalik kasutajatunnus (e-posti aadress)!";
-			} else {
-				$loginEmail = $_POST["loginEmail"];
-			}
-		}
-		
-		if(!empty($loginEmail) and !empty($_POST["loginPassword"])){
-			//echo "Alustan sisselogimist!";
-			//$hash = hash("sha512", $_POST["loginEmail"]);
-			$notice = signIn($loginEmail, $_POST["loginPassword"]);
-			//$notice = signIn($loginEmail, $hash);
-		}
-		
-	}//if loginButton
 	
 	
 	
@@ -125,10 +59,15 @@
 <body>
 	
 	
-	<form>
-	<input name="userName" method="POST" placeholder="Kasutajanimi" type="text">
-	<input name="userRegister" type="SUBMIT" value="Loo kasutaja"
-	<p></p>
+	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<label>Eesnimi </label>
+		<input name="signupFirstName" type="text" value="<?php echo $signupFirstName; ?>">
+		<span><?php echo $signupFirstNameError; ?></span>
+		<br>
+		<label>Perekonnanimi </label>
+		<input name="signupFamilyName" type="text" value="<?php echo $signupFamilyName; ?>">
+		<span><?php echo $signupFamilyNameError; ?></span>
+		<br>
 	
 	
 	</form>

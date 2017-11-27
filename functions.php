@@ -71,21 +71,5 @@
 		$data = htmlspecialchars($data);
 		return $data;
 	}
-	/*
-	$x = 7;
-	$y = 4;
-	echo "Esimene summa on: " .($x + $y) ."\n";
-	addValues();
 	
-	function addValues(){
-	echo "Teine summa on: " .($GLOBALS["x"] + $GLOBALS["y"]) ."\n";
-		$a = 3;
-		$b = 2;
-		echo "Kolmas summa on: " .($a + $b) ."\n";
-		$x = 1;
-		$y = 2;
-		echo "Hoopis teine summa on: " .($x + $y) ."\n";
-	}
-	echo "Neljas summa on: " .($a + $b) ."\n";
-	*/
 ?>
