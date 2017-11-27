@@ -6,7 +6,24 @@ $picture_number=rand(1, 6);
 
 ?>
 
-ALUSTA PARKIMIST SIIA!!
+<html>
+<head>
+<title>Alusta parkimist.</title>
+<link rel="stylesheet" type="text/css" href="style/general.css">
+</head>
+
+<body>
+<h1>Vali sobiv aeg</h1>
+<input type="number" name="quantity" min="0" max="99">
+
+<form action="andmed.php"> 
+<input type="submit" value="Saada">
+<br>
+
+
+
+
+<p>Siia tulevad parkla valikud varsti?</p>
 <?php
 if ($picture_number==1)
 {
