@@ -3,6 +3,12 @@
 	require("config.php");
 	$database = "if17_joosep_2";
 	
+	//kui on juba sisseloginud
+	if(isset($_SESSION["userId"])){
+		header("Location: main.php");
+		exit();
+	}
+	
 	$signupPassword = "";
 	$signupFirstName = "";
 	$signupFamilyName = "";
@@ -18,10 +24,29 @@
 	$signupFirstNameError = "";
 	$signupFamilyNameError = "";
 	$signupBirthDayError = "";
-	$signupGenderError = "";
+	
 	$signupEmailError = "";
 	$signupPasswordError = "";
 	
+	
+	if(isset($_POST["loginButton"])){
+		//kas on kasutajanimi sisestatud
+		if (isset ($_POST["loginEmail"])){
+			if (empty ($_POST["loginEmail"])){
+				$loginEmailError ="NB! Sisselogimiseks on 	vajalik kasutajatunnus (e-posti aadress)!";
+			} else {
+				$loginEmail = $_POST["loginEmail"];
+			}
+		}
+		
+		if(!empty($loginEmail) and !empty($_POST["loginPassword"])){
+			//echo "Alustan sisselogimist!";
+			//$hash = hash("sha512", $_POST["loginEmail"]);
+			$notice = signIn($loginEmail, $_POST["loginPassword"]);
+			//$notice = signIn($loginEmail, $hash);
+		}
+		
+	}//if loginButton
 	
 	//kas klikiti kasutaja loomise nupul
 	if(isset($_POST["signupButton"])){
@@ -102,6 +127,7 @@
 			}
 		}
 	}
+		
 	
 	
 	
@@ -137,11 +163,15 @@
 		<span><?php echo $signupEmailError; ?></span>
 		<br>
 		<label>Parool </label>
-		<input name="signupPassword" placeholder="Salasõna" type="password"><span><?php echo $signupPasswordError; ?></span>
+		<input name="signupPassword" placeholder="8-märgiline salasõna" type="password"><span><?php echo $signupPasswordError; ?></span>
 		<br><br>
 
 		
-		<input type="submit" action="login.php" value="Loo kasutaja">
+		<input type="submit" name="signupButton" action="sisselogitud.php" value="Loo kasutaja">
+		
+		<p><a type="submit" href="esileht.php">Tagasi esilehele</a></p>
+		
+		
 	
 	
 	</form>

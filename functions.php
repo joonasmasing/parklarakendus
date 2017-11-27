@@ -23,10 +23,12 @@
 				
 				//määran sessioonimuutujaid
 				$_SESSION["userId"] = $id;
+				$_SESSION["firstname"] = $firstnameFromDb;
+				$_SESSION["lastname"] = $lastnameFromDb;
 				$_SESSION["userEmail"] = $emailFromDb;
 				
 				//lähen pealehele
-				header("Location: main.php");
+				header("Location: sisselogitud.php");
 				exit();
 				
 			} else {
