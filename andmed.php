@@ -3,12 +3,6 @@
 	require("config.php");
 	$database = "if17_joosep_2";
 	
-	//kui on juba sisseloginud
-	if(isset($_SESSION["userId"])){
-		header("Location: main.php");
-		exit();
-	}
-	
 	$signupTyyp = "";
 	$signupV2rv = "";
 	$signupRegnr = "";
@@ -87,10 +81,13 @@
 		if(empty($signupMarkError) and empty($signupRegnrError) and empty($signupTyypError) and empty($signupV2rvError)
 		){
 			echo "Hakkan parkima! \n";
-			$signupMark = $_POST["signupMark"];
-			$signupRegnr = $_POST["signupRegnr"];
-			$signupTyyp = $_POST["signupTyyp"];
-			$signupV2rv = $_POST["signupV2rv"];
+			if (isset($_POST["signupMark"]) and ($_POST["signupRegnr"]) and ($_POST["signupTyyp"]) and ($_POST["signupV2rv"]))
+			{
+				$signupMark = $_POST["signupMark"];
+				$signupRegnr = $_POST["signupRegnr"];
+				$signupTyyp = $_POST["signupTyyp"];
+				$signupV2rv = $_POST["signupV2rv"];
+			}
 			//echo $signupPassword;
 			//ühendus serveriga
 			$database = "if17_joosep_2";
@@ -115,12 +112,12 @@
 <html lang="et">
 <head>
 	<meta charset="utf-8">
-	<title>Parklasse registreerimine</title>
+	<title>Auto andmete registreerimine</title>
 	<link rel="stylesheet" type="text/css" href="style/general.css">
 	
 </head>
 <body>
-	<h1>Sisesta andmed</h1>
+	<h1>Sisesta auto andmed</h1>
 	 
 	 
 	 	<form method="POST">
