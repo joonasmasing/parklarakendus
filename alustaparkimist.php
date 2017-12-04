@@ -19,6 +19,8 @@ foreach ($parking_lots as $key=>$lot){
 		}
 	}
 	$parking_lots2 .= "</select> \n";
+	
+$quantity=$_GET['quantity'];
 ?>
 <!DOCTYPE html>
 
@@ -31,16 +33,22 @@ foreach ($parking_lots as $key=>$lot){
 <body>
 <h1>Vali sobiv aeg</h1>
 <input type="number" name="quantity" min="0" max="99" value="0">aastat<br>
-<input type="number" name="quantity" min="0" max="12" value="0">kuud<br>
-<input type="number" name="quantity" min="0" max="4" value="0">nädalat<br>
-<input type="number" name="quantity" min="0" max="7" value="0">päeva<br>
-<input type="number" name="quantity" min="0" max="24" value="0">tundi<br>
+<input type="number" name="quantity1" min="0" max="12" value="0">kuud<br>
+<input type="number" name="quantity2" min="0" max="4" value="0">nädalat<br>
+<input type="number" name="quantity3" min="0" max="7" value="0">päeva<br>
+<input type="number" name="quantity4" min="0" max="24" value="0">tundi<br>
 <?php
 	echo $parking_lots2;
 ?>
 
 <form action="andmed.php"> 
 <input type="submit" value="Saada">
+<?php
+
+echo $quantity;
+
+
+?>
 <br>
 
 <p>Luksparka, eesti parim kindlasti. Hind 5€/tund</p>
