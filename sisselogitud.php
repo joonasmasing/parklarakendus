@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 
 <?php
-
-$picture_number=rand(1, 6);
+require("functions.php");
+	
+	//kui pole sisseloginud, siis sisselogimise lehele
+	if(!isset($_SESSION["userId"])){
+		header("Location: login.php");
+		exit();
+	}
+	
+	//kui logib välja
+	if (isset($_GET["logout"])){
+		//lõpetame sessiooni
+		session_destroy();
+		header("Location: login.php");
+		exit();
+	}
+	
+	$picture_number=rand(1, 6);
 
 ?>
 
 <html>
-<head>
-<title>Parklarakendus</title>
-<link rel="stylesheet" type="text/css" href="style/general.css">
-</head>
+	<head>
+	<title>Parklarakendus</title>
+		<link rel="stylesheet" type="text/css" href="style/general.css">
+	</head>
 
-<body>
-<h1>Oled edukalt sisse loginud. </h1>
-<form action="andmed.php"> 
-<input type="submit" value="Sisesta andmed">
-</form>
-<form action="alustaparkimist.php"> 
-<input type="submit" value="Alusta parkimist">
-</form>
-<p></p>
+	<body>
+		<h1>Oled edukalt sisse loginud. </h1>
+		<form action="andmed.php"> 
+		<input type="submit" value="Sisesta andmed">
+		</form>
+		<form action="alustaparkimist.php"> 
+		<input type="submit" value="Alusta parkimist">
+		<p><a href="?logout=1">Logi välja</a>!</p>
+		</form>
+		<p></p>
 
 <?php
 if ($picture_number==1)
@@ -44,6 +60,6 @@ echo '<img src="pildid/tyhiparkla.jpg" alt="tyhi parkla" style="width:400px;heig
 }
 
 ?>
-</body>
+	</body>
 </html>
 

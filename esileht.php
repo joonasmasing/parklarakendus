@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 
 <?php
+	
+	
+	$picture_number=rand(1, 6);
 
-$picture_number=rand(1, 6);
+
 
 ?>
 
