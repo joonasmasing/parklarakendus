@@ -21,7 +21,7 @@
 	
 	
 	if(isset($_POST["loginButton"])){
-		//kas on mark on sisestatud
+		//Õige mark
 		if (isset ($_POST["signupMark"])){
 			if (empty ($_POST["signupMark"])){
 				$loginMarkError ="NB! Sellist marki ei eksisteeri!.";
@@ -31,38 +31,66 @@
 		}
 		
 		if(!empty($signupMark)){
-			//echo "Alustan Parkimist!";
 			$notice = signIn($signupMark, $_POST["signupMark"]);
-			//$notice = signIn($loginEmail, $hash);
 		}
 		
 	}
 	
 	
 		if(isset($_POST["loginButton"])){
-		//kas on reg nr on sisestatud
+		//Õige reg nr
 		if (isset ($_POST["signupRegnr"])){
 			if (empty ($_POST["signupRegnr"])){
-				$loginEmailError ="NB! Reg. nr. peab olema korrektne.";
+				$loginRegnrError ="NB! Reg. nr. peab olema korrektne.";
 			} else {
-				$loginEmail = $_POST["signupRegnr"];
+				$loginRegnr = $_POST["signupRegnr"];
 			}
 		}
 		
 		if(!empty($signupRegnr)){
-			//echo "Alustan Parkimist!";
 			$notice = signIn($signupRegnr, $_POST["signupRegnr"]);
-			//$notice = signIn($loginEmail, $hash);
 		}
 		
 	}
-	
+	if(isset($_POST["loginButton"])){
+		//Õige keretüüp
+		if (isset ($_POST["signupTyyp"])){
+			if (empty ($_POST["signupTyyp"])){
+				$loginTyypError ="NB! Selline keretüüp ei sobi!";
+			} else {
+				$loginTyyp = $_POST["signupTyyp"];
+			}
+		}
+		
+		if(!empty($signupTyyp)){
+			$notice = signIn($signupTyyp, $_POST["signupTyyp"]);
+		}
+		
+	}
+	if(isset($_POST["loginButton"])){
+		//Õige värv
+		if (isset ($_POST["signupV2rv"])){
+			if (empty ($_POST["signupV2rv"])){
+				$loginV2rvError ="NB! Imelik värv.";
+			} else {
+				$loginV2rv = $_POST["signupV2rv"];
+			}
+		}
+		
+		if(!empty($signupV2rv)){
+			$notice = signIn($signupV2rv, $_POST["signupV2rv"]);
+		}
+		
+	}
 	
 		//KIRJUTAN UUED ANDMED ANDMEBAASI
 		if(empty($signupMarkError) and empty($signupRegnrError) and empty($signupTyypError) and empty($signupV2rvError)
 		){
 			echo "Hakkan parkima! \n";
+			$signupMark = $_POST["signupMark"];
 			$signupRegnr = $_POST["signupRegnr"];
+			$signupTyyp = $_POST["signupTyyp"];
+			$signupV2rv = $_POST["signupV2rv"];
 			//echo $signupPassword;
 			//ühendus serveriga
 			$database = "if17_joosep_2";
