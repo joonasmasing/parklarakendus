@@ -48,11 +48,11 @@
 
 <!DOCTYPE html>
 <html lang="et">
-<head>
-	<meta charset="utf-8">
-	<title>Sisselogimine või uue kasutaja loomine</title>
-	<link rel="stylesheet" type="text/css" href="style/general.css">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<title>Sisselogimine või uue kasutaja loomine</title>
+		<link rel="stylesheet" type="text/css" href="style/general.css">
+	</head>
 <body>
 	<h1>Logi sisse!</h1>
 	<form method="POST">
@@ -64,7 +64,7 @@
 		<br><br>
 		<input name="loginButton" type="submit" value="Logi sisse"><span><?php echo $notice; ?>
 	
-	<p><a type="submit" href="esileht.php">Tagasi esilehele</a></p>
+		<p><a type="submit" href="esileht.php">Tagasi esilehele</a></p>
 	
 	</form>
 		

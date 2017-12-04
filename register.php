@@ -5,7 +5,7 @@
 	
 	//kui on juba sisseloginud
 	if(isset($_SESSION["userId"])){
-		header("Location: main.php");
+		header("Location: sisselogitud.php");
 		exit();
 	}
 	
@@ -18,7 +18,7 @@
 	$signupBirthMonth = null;
 	$signupBirthYear = null;
 	$signupBirthDate = null;
-	
+	$notice = "";
 	$loginEmail = "";
 	
 	$signupFirstNameError = "";
@@ -167,7 +167,7 @@
 		<br><br>
 
 		
-		<input name="loginButton" type="submit" value="Logi sisse"><span><?php echo $notice; ?>
+		<input name="signupButton" type="submit" value="Registreeri kasutaja"><span><?php echo $notice; ?>
 		
 		<p><a type="submit" href="esileht.php">Tagasi esilehele</a></p>
 		<p>Kasutaja olemas?<a type="submit" href="login.php"> Sisselogimise lehele</a></p>
