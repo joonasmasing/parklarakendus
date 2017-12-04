@@ -23,6 +23,9 @@
 		<input name="loginPassword" placeholder="Salasõna" type="password">
 		<br><br>
 		<input type="submit" value="Logi sisse">
+	
+	<p><a type="submit" href="esileht.php">Tagasi esilehele</a></p>
+	
 	</form>
 		
 </body>

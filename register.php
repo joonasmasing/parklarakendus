@@ -170,7 +170,7 @@
 		<input type="submit" name="signupButton" action="sisselogitud.php" value="Loo kasutaja">
 		
 		<p><a type="submit" href="esileht.php">Tagasi esilehele</a></p>
-		
+		<p>Kasutaja olemas?<a type="submit" href="login.php"> Sisselogimise lehele</a></p>
 		
 	
 	
