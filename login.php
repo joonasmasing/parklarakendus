@@ -2,7 +2,7 @@
 	require("config.php");
 	require("functions.php");
 	
-	//kui on sisseloginud, siis kohe main.php lehele
+	//kui on sisseloginud, siis kohe sisselogitud.php lehele
 	if (isset($_SESSION["userId"])){
 		header("Location: sisselogitud.php");
 		exit();
