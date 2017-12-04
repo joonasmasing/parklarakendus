@@ -7,8 +7,11 @@ if (isset ($_POST['parking_lots'])){
 }
 	
 $parking_lots=['luksparkla', 'muruparkla', 'ostukekuse parkla', 'siseparkla', 'majaesine parkla'];
+$pricesForHour = [5,.2,2,1,0];
+$pricesForDay = [5,.2,2,1,0];
+$pricesForWeek = [5,.2,2,1,0];
 $parking_lots2 = "";
-$parking_lots2 .= '<select name="parking_lots">' ."\n";
+$parking_lots2 .= '<select name="parking_lots" id="parking_lots">' ."\n";
 $parking_lots2 .= '<option value="" selected disabled>vali parkla</option>' ."\n";
 
 foreach ($parking_lots as $key=>$lot){
@@ -24,30 +27,44 @@ if (isset($_GET['quantity1']))
 {
      $quantity=$_GET['quantity1'];
 }	
+
+if (isset($_POST["sendAcceptedData"])){
+	echo "Hind: " .$_POST["totalPrice"];
+}
 ?>
+
+
 <!DOCTYPE html>
 
 <html>
 <head>
 <title>Alusta parkimist.</title>
 <link rel="stylesheet" type="text/css" href="style/general.css">
+<script type="text/javascript" src="javascript/priceData.js" defer></script>
 </head>
 
 <body>
 <h1>Vali sobiv aeg</h1>
-<input type="number" name="quantity1" min="0" max="4" value="0">nädalat<br>
-<input type="number" name="quantity2" min="0" max="7" value="0">päeva<br>
-<input type="number" name="quantity3" min="0" max="24" value="0">tundi<br>
+<form method="POST">
+<input type="number" name="quantity1" id="quantity1" min="0" max="4" value="0">nädalat<br>
+<input type="number" name="quantity2" id="quantity2" min="0" max="7" value="0">päeva<br>
+<input type="number" name="quantity3" id="quantity3" min="0" max="24" value="0">tundi<br>
 <?php
 	echo $parking_lots2;
+	echo '<input type="hidden" name="priceForHour" id="priceForHour" value="' .implode(",", $pricesForHour) .'">';
+	echo '<input type="hidden" name="priceForDay" id="priceForDay" value="' .implode(",", $pricesForDay) .'">';
+	echo '<input type="hidden" name="priceForWeek" id="priceForWeek" value="' .implode(",", $pricesForWeek) .'">';
 ?>
 
-<form action="andmed.php"> 
-<input type="submit" value="Saada">
+<input type="hidden" name="totalPrice" id="totalPrice" value="">
+<input type="submit" value="Saada" name="sendAcceptedData" id="sendAcceptedData">
+
+</form>
+<button id="priceBtn">Arvuta hind</button><span id="totalPricePlace"></span>
 <?php
 if (isset($_GET['quantity1']))
 {
-echo $quantity1;
+//echo $quantity1;
 }
 
 ?>
